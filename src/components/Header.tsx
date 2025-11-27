@@ -13,7 +13,7 @@ const Header = () => {
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
             <Zap className="h-6 w-6 text-primary-foreground" />
           </div>
-          <span className="text-primary">Elite Electrical</span>
+          <span className="text-primary">DEXGEN Electrical Solutions</span>
         </Link>
 
         {/* Desktop Navigation */}
