@@ -139,7 +139,7 @@ const Footer = () => {
                 <span>
                   123 Electric Avenue
                   <br />
-                  New York, NY 10001
+                  Lagos, Nigeria
                 </span>
               </li>
               <li className="flex items-center gap-2 text-sm text-primary-foreground/80">
@@ -148,7 +148,7 @@ const Footer = () => {
                   href="tel:+1234567890"
                   className="hover:text-accent transition-colors"
                 >
-                  (123) 456-7890
+                  +234 703 983 3456
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-primary-foreground/80">
@@ -157,7 +157,7 @@ const Footer = () => {
                   href="mailto:info@eliteelectrical.com"
                   className="hover:text-accent transition-colors"
                 >
-                  info@eliteelectrical.com
+                  info@DexgenEngineering.com
                 </a>
               </li>
             </ul>
@@ -167,7 +167,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-primary-foreground/80">
-              © {new Date().getFullYear()} Elite Electrical Services. All rights
+              © {new Date().getFullYear()} Dengen Engineering. All rights
               reserved.
             </p>
             <div className="flex gap-6 text-sm text-primary-foreground/80">

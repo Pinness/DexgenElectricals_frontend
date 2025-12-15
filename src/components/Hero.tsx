@@ -22,16 +22,24 @@ const Hero = () => {
             Professional Electrical Services You Can Trust
           </h1>
           <p className="text-lg md:text-xl mb-8 text-primary-foreground/90">
-            Licensed, insured, and available 24/7 for all your residential and commercial electrical needs. Quality workmanship guaranteed.
+            Licensed, insured, and available 24/7 for all your residential and
+            commercial electrical needs. Quality workmanship guaranteed.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button size="lg" className="bg-gradient-accent hover:opacity-90 text-accent-foreground font-semibold">
+            <Button
+              size="lg"
+              className="bg-gradient-accent hover:opacity-90 text-accent-foreground font-semibold"
+            >
               Get Free Quote
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            >
               <Phone className="mr-2 h-5 w-5" />
-              Call (123) 456-7890
+              Call +234 703 983 3456
             </Button>
           </div>
 
@@ -43,30 +51,36 @@ const Hero = () => {
               </div>
               <div>
                 <div className="font-semibold">Licensed</div>
-                <div className="text-sm text-primary-foreground/80">& Insured</div>
+                <div className="text-sm text-primary-foreground/80">
+                  & Insured
+                </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Clock className="h-6 w-6 text-accent" />
               </div>
               <div>
                 <div className="font-semibold">24/7</div>
-                <div className="text-sm text-primary-foreground/80">Emergency</div>
+                <div className="text-sm text-primary-foreground/80">
+                  Emergency
+                </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Award className="h-6 w-6 text-accent" />
               </div>
               <div>
                 <div className="font-semibold">15+ Years</div>
-                <div className="text-sm text-primary-foreground/80">Experience</div>
+                <div className="text-sm text-primary-foreground/80">
+                  Experience
+                </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <span className="text-2xl font-bold text-accent">★</span>

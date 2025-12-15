@@ -12,23 +12,25 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         <Hero />
         <Services />
-        
+
         {/* Why Choose Us Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                  Why Choose Elite Electrical?
+                  Why Choose Dexgen Engineering?
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  With over 15 years of experience, we've built our reputation on quality workmanship, reliability, and exceptional customer service.
+                  With over 15 years of experience, we've built our reputation
+                  on quality workmanship, reliability, and exceptional customer
+                  service.
                 </p>
-                
+
                 <div className="space-y-4">
                   {[
                     "Licensed and fully insured professionals",
@@ -45,7 +47,7 @@ const Index = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="lg:pl-12">
                 <Card className="p-8 shadow-strong">
                   <div className="text-center mb-6">
@@ -53,7 +55,8 @@ const Index = () => {
                       Get Your Free Quote Today
                     </h3>
                     <p className="text-muted-foreground">
-                      Fill out the form below and we'll get back to you within 24 hours
+                      Fill out the form below and we'll get back to you within
+                      24 hours
                     </p>
                   </div>
                   <ContactForm />
@@ -62,9 +65,9 @@ const Index = () => {
             </div>
           </div>
         </section>
-        
+
         <Testimonials />
-        
+
         {/* Emergency CTA */}
         <section className="py-16 bg-gradient-primary text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
@@ -72,16 +75,20 @@ const Index = () => {
               Need Emergency Electrical Service?
             </h2>
             <p className="text-lg mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
-              We're available 24/7 for urgent electrical issues. Don't wait - call us now!
+              We're available 24/7 for urgent electrical issues. Don't wait -
+              call us now!
             </p>
-            <Button size="lg" className="bg-accent hover:opacity-90 text-accent-foreground font-semibold">
+            <Button
+              size="lg"
+              className="bg-accent hover:opacity-90 text-accent-foreground font-semibold"
+            >
               <Phone className="mr-2 h-5 w-5" />
-              Call Emergency Hotline: (123) 456-7890
+              Call Emergency Hotline: +234 703 983 3456
             </Button>
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

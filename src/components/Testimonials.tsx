@@ -4,21 +4,21 @@ import { Star } from "lucide-react";
 const testimonials = [
   {
     name: "Sarah Johnson",
-    location: "Brooklyn, NY",
+    location: "Lagos",
     rating: 5,
     text: "Outstanding service! They responded quickly to our emergency and fixed our electrical issue professionally. Highly recommend Elite Electrical.",
     date: "2 weeks ago",
   },
   {
-    name: "Michael Chen",
-    location: "Manhattan, NY",
+    name: "Michael Ojo",
+    location: "Ogun",
     rating: 5,
     text: "Excellent work on our office renovation. The team was professional, on time, and the quality of work exceeded our expectations.",
     date: "1 month ago",
   },
   {
-    name: "Emily Rodriguez",
-    location: "Queens, NY",
+    name: "Emily Silas",
+    location: "Lagos",
     rating: 5,
     text: "Very satisfied with the panel upgrade they did for us. Clear communication, fair pricing, and meticulous attention to detail.",
     date: "3 weeks ago",
@@ -34,7 +34,8 @@ const Testimonials = () => {
             What Our Clients Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our satisfied customers have to say.
+            Don't just take our word for it. Here's what our satisfied customers
+            have to say.
           </p>
         </div>
 
@@ -47,17 +48,23 @@ const Testimonials = () => {
                     <Star key={i} className="h-5 w-5 fill-accent text-accent" />
                   ))}
                 </div>
-                
+
                 <p className="text-foreground mb-6 leading-relaxed">
                   "{testimonial.text}"
                 </p>
-                
+
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                   <div>
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.location}</div>
+                    <div className="font-semibold text-foreground">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {testimonial.location}
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">{testimonial.date}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.date}
+                  </div>
                 </div>
               </CardContent>
             </Card>

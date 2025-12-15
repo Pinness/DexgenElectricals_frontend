@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-gradient-primary text-primary-foreground py-20">
@@ -17,7 +17,8 @@ const Contact = () => {
               Get In Touch
             </h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/90">
-              Ready to start your electrical project? Contact us today for a free consultation and quote.
+              Ready to start your electrical project? Contact us today for a
+              free consultation and quote.
             </p>
           </div>
         </section>
@@ -35,9 +36,14 @@ const Contact = () => {
                         <Phone className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg mb-2 text-foreground">Phone</h3>
-                        <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                          (123) 456-7890
+                        <h3 className="font-semibold text-lg mb-2 text-foreground">
+                          Phone
+                        </h3>
+                        <a
+                          href="tel:+1234567890"
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          +234 703 983 3456
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">
                           Available 24/7 for emergencies
@@ -54,9 +60,14 @@ const Contact = () => {
                         <Mail className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg mb-2 text-foreground">Email</h3>
-                        <a href="mailto:info@eliteelectrical.com" className="text-muted-foreground hover:text-primary transition-colors">
-                          info@eliteelectrical.com
+                        <h3 className="font-semibold text-lg mb-2 text-foreground">
+                          Email
+                        </h3>
+                        <a
+                          href="mailto:info@eliteelectrical.com"
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          info@DexgenEngineering.com
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">
                           We respond within 24 hours
@@ -73,10 +84,13 @@ const Contact = () => {
                         <MapPin className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg mb-2 text-foreground">Location</h3>
+                        <h3 className="font-semibold text-lg mb-2 text-foreground">
+                          Location
+                        </h3>
                         <p className="text-muted-foreground">
-                          123 Electric Avenue<br />
-                          New York, NY 10001
+                          123 Electric Avenue
+                          <br />
+                          Lagos, Nigeria
                         </p>
                       </div>
                     </div>
@@ -90,12 +104,16 @@ const Contact = () => {
                         <Clock className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg mb-2 text-foreground">Hours</h3>
+                        <h3 className="font-semibold text-lg mb-2 text-foreground">
+                          Hours
+                        </h3>
                         <div className="space-y-1 text-sm text-muted-foreground">
                           <p>Monday - Friday: 8am - 6pm</p>
                           <p>Saturday: 9am - 4pm</p>
                           <p>Sunday: Emergency only</p>
-                          <p className="text-accent font-medium mt-2">24/7 Emergency Service</p>
+                          <p className="text-accent font-medium mt-2">
+                            24/7 Emergency Service
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -126,20 +144,20 @@ const Contact = () => {
                 Service Areas
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We proudly serve the greater New York metropolitan area
+                We proudly serve the greater Lagos metropolitan area
               </p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
               {[
-                "Manhattan",
-                "Brooklyn",
-                "Queens",
-                "Bronx",
-                "Staten Island",
-                "Long Island",
-                "Westchester",
-                "New Jersey",
+                "Lagos Mainland",
+                "Ikeja",
+                "Ikorodu",
+                "Badagry",
+                "Lagos Island",
+                "Epe",
+                "Apapa",
+                "Ajekunle",
               ].map((area, index) => (
                 <div
                   key={index}
@@ -152,7 +170,7 @@ const Contact = () => {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

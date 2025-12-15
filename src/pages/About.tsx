@@ -7,16 +7,17 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-gradient-primary text-primary-foreground py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              About Elite Electrical
+              About Dexgen Engineering
             </h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/90">
-              Your trusted partner for professional electrical services since 2008
+              Your trusted partner for professional electrical services since
+              2008
             </p>
           </div>
         </section>
@@ -30,13 +31,24 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
-                  Founded in 2008, Elite Electrical Services has been serving the New York metropolitan area with dedication and excellence. What started as a small team of licensed electricians has grown into one of the most trusted electrical service providers in the region.
+                  Founded in 2008, Dexgen Engineering has been serving the Lagos
+                  metropolitan area with dedication and excellence. What started
+                  as a small team of licensed electricians has grown into one of
+                  the most trusted electrical service providers in the region.
                 </p>
                 <p>
-                  Our commitment to quality workmanship, transparent pricing, and exceptional customer service has earned us the trust of hundreds of satisfied residential and commercial clients. We take pride in every project, whether it's a simple outlet installation or a complete commercial electrical system upgrade.
+                  Our commitment to quality workmanship, transparent pricing,
+                  and exceptional customer service has earned us the trust of
+                  hundreds of satisfied residential and commercial clients. We
+                  take pride in every project, whether it's a simple outlet
+                  installation or a complete commercial electrical system
+                  upgrade.
                 </p>
                 <p>
-                  With over 15 years of experience, our team stays current with the latest electrical codes, technologies, and best practices. We're not just electricians – we're your partners in creating safe, efficient, and reliable electrical systems.
+                  With over 15 years of experience, our team stays current with
+                  the latest electrical codes, technologies, and best practices.
+                  We're not just electricians – we're your partners in creating
+                  safe, efficient, and reliable electrical systems.
                 </p>
               </div>
             </div>
@@ -60,33 +72,44 @@ const About = () => {
                 {
                   icon: Shield,
                   title: "Safety First",
-                  description: "We prioritize safety in every project, following all codes and regulations to protect you and your property.",
+                  description:
+                    "We prioritize safety in every project, following all codes and regulations to protect you and your property.",
                 },
                 {
                   icon: Award,
                   title: "Quality Work",
-                  description: "Our workmanship is backed by years of experience and a commitment to excellence in every detail.",
+                  description:
+                    "Our workmanship is backed by years of experience and a commitment to excellence in every detail.",
                 },
                 {
                   icon: Users,
                   title: "Customer Focus",
-                  description: "Your satisfaction is our priority. We listen, communicate, and deliver solutions that exceed expectations.",
+                  description:
+                    "Your satisfaction is our priority. We listen, communicate, and deliver solutions that exceed expectations.",
                 },
                 {
                   icon: CheckCircle2,
                   title: "Reliability",
-                  description: "We show up on time, complete work as promised, and stand behind our services with comprehensive warranties.",
+                  description:
+                    "We show up on time, complete work as promised, and stand behind our services with comprehensive warranties.",
                 },
               ].map((value, index) => {
                 const Icon = value.icon;
                 return (
-                  <Card key={index} className="text-center hover:shadow-medium transition-shadow">
+                  <Card
+                    key={index}
+                    className="text-center hover:shadow-medium transition-shadow"
+                  >
                     <CardContent className="pt-6">
                       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary mx-auto mb-4">
                         <Icon className="h-8 w-8 text-primary-foreground" />
                       </div>
-                      <h3 className="text-xl font-bold mb-3 text-foreground">{value.title}</h3>
-                      <p className="text-muted-foreground">{value.description}</p>
+                      <h3 className="text-xl font-bold mb-3 text-foreground">
+                        {value.title}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {value.description}
+                      </p>
                     </CardContent>
                   </Card>
                 );
@@ -102,7 +125,7 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground text-center">
                 Certifications & Credentials
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   "Licensed Master Electrician",
@@ -122,7 +145,7 @@ const About = () => {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );
