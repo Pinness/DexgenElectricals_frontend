@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Zap } from "lucide-react";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,9 +60,7 @@ const Header = () => {
             <Phone className="h-4 w-4" />
             +234 703 983 3456
           </a>
-          <Button className="bg-gradient-accent hover:opacity-90">
-            Get Free Quote
-          </Button>
+          <QuoteDialog />
         </div>
 
         {/* Mobile Menu Button */}
@@ -124,9 +123,11 @@ const Header = () => {
               <Phone className="h-4 w-4" />
               (123) 456-7890
             </a>
-            <Button className="bg-gradient-accent hover:opacity-90 w-full">
-              Get Free Quote
-            </Button>
+            <QuoteDialog>
+              <Button className="bg-gradient-accent hover:opacity-90 w-full">
+                Get Free Quote
+              </Button>
+            </QuoteDialog>
           </div>
         </div>
       )}
