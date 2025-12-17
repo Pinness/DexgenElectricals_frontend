@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Shield, Clock, Award } from "lucide-react";
 import heroImage from "@/assets/hero-electrician.jpg";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const Hero = () => {
   return (
@@ -22,17 +23,20 @@ const Hero = () => {
             Professional Electrical Services You Can Trust
           </h1>
           <p className="text-lg md:text-xl mb-8 text-primary-foreground/90">
-            Licensed, insured, and available 24/7 for all your residential and
-            commercial electrical needs. Quality workmanship guaranteed.
+            From residential wiring to industrial installations, Dexgen
+            Engineering delivers safe, reliable, and efficient electrical
+            services across Lagos and beyond.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button
-              size="lg"
-              className="bg-gradient-accent hover:opacity-90 text-accent-foreground font-semibold"
-            >
-              Get Free Quote
-            </Button>
+            <QuoteDialog>
+              <Button
+                size="lg"
+                className="bg-gradient-accent hover:opacity-90 text-accent-foreground font-semibold"
+              >
+                Get Free Quote
+              </Button>
+            </QuoteDialog>
             <Button
               size="lg"
               variant="outline"

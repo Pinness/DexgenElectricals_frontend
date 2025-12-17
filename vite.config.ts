@@ -9,7 +9,10 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger()].filter(
+    Boolean
+  ),
+  base: process.env.VITE_BASE_PATH || "/DexgenElectricals_frontend",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
