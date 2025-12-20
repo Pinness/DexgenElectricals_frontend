@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Shield, Clock, Award } from "lucide-react";
 import heroImage from "@/assets/hero-electrician.jpg";
 import QuoteDialog from "@/components/QuoteDialog";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Hero = () => {
   return (
@@ -41,9 +42,12 @@ const Hero = () => {
               size="lg"
               variant="outline"
               className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              asChild
             >
-              <Phone className="mr-2 h-5 w-5" />
-              Call +234 703 983 3456
+              <a href={CONTACT_INFO.phone.href}>
+                <Phone className="mr-2 h-5 w-5" />
+                Call {CONTACT_INFO.phone.display}
+              </a>
             </Button>
           </div>
 
