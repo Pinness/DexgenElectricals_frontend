@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Contact = () => {
   return (
@@ -40,10 +41,10 @@ const Contact = () => {
                           Phone
                         </h3>
                         <a
-                          href="tel:+1234567890"
+                          href={CONTACT_INFO.phone.href}
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          +234 703 983 3456
+                          {CONTACT_INFO.phone.display}
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">
                           Available 24/7 for emergencies
@@ -64,10 +65,10 @@ const Contact = () => {
                           Email
                         </h3>
                         <a
-                          href="mailto:info@eliteelectrical.com"
+                          href={CONTACT_INFO.email.href}
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          info@DexgenEngineering.com
+                          {CONTACT_INFO.email.display}
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">
                           We respond within 24 hours
@@ -88,9 +89,7 @@ const Contact = () => {
                           Location
                         </h3>
                         <p className="text-muted-foreground">
-                          123 Electric Avenue
-                          <br />
-                          Lagos, Nigeria
+                          {CONTACT_INFO.address.display}
                         </p>
                       </div>
                     </div>

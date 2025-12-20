@@ -9,6 +9,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Footer = () => {
   return (
@@ -136,28 +137,24 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-primary-foreground/80">
                 <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                <span>
-                  123 Electric Avenue
-                  <br />
-                  Lagos, Nigeria
-                </span>
+                <span>{CONTACT_INFO.address.display}</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-primary-foreground/80">
                 <Phone className="h-5 w-5 flex-shrink-0" />
                 <a
-                  href="tel:+1234567890"
+                  href={CONTACT_INFO.phone.href}
                   className="hover:text-accent transition-colors"
                 >
-                  +234 703 983 3456
+                  {CONTACT_INFO.phone.display}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-primary-foreground/80">
                 <Mail className="h-5 w-5 flex-shrink-0" />
                 <a
-                  href="mailto:info@eliteelectrical.com"
+                  href={CONTACT_INFO.email.href}
                   className="hover:text-accent transition-colors"
                 >
-                  info@DexgenEngineering.com
+                  {CONTACT_INFO.email.display}
                 </a>
               </li>
             </ul>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Zap } from "lucide-react";
 import QuoteDialog from "@/components/QuoteDialog";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,11 +55,11 @@ const Header = () => {
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="tel:+234 703 983 3456"
+            href={CONTACT_INFO.phone.href}
             className="flex items-center gap-2 text-sm font-medium text-primary"
           >
             <Phone className="h-4 w-4" />
-            +234 703 983 3456
+            {CONTACT_INFO.phone.display}
           </a>
           <QuoteDialog />
         </div>
@@ -117,11 +118,11 @@ const Header = () => {
               Contact
             </Link>
             <a
-              href="tel:+1234567890"
+              href={CONTACT_INFO.phone.href}
               className="flex items-center gap-2 text-sm font-medium text-primary"
             >
               <Phone className="h-4 w-4" />
-              (123) 456-7890
+              {CONTACT_INFO.phone.display}
             </a>
             <QuoteDialog>
               <Button className="bg-gradient-accent hover:opacity-90 w-full">
