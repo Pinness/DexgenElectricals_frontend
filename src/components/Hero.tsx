@@ -19,17 +19,17 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-2xl text-primary-foreground">
+        <div className="max-w-3xl mx-auto text-center text-primary-foreground">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             Professional Electrical Services You Can Trust
           </h1>
-          <p className="text-lg md:text-xl mb-8 text-primary-foreground/90">
+          <p className="text-lg md:text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
             From residential wiring to industrial installations, Dexgen
             Engineering delivers safe, reliable, and efficient electrical
             services across Lagos and beyond.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 mb-12 justify-center">
             <QuoteDialog>
               <Button
                 size="lg"
@@ -40,8 +40,7 @@ const Hero = () => {
             </QuoteDialog>
             <Button
               size="lg"
-              variant="outline"
-              className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="bg-white text-primary hover:bg-white/90 font-semibold"
               asChild
             >
               <a href={CONTACT_INFO.phone.href}>
@@ -52,8 +51,8 @@ const Hero = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left md:text-center">
+            <div className="flex flex-col md:items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Shield className="h-6 w-6 text-accent" />
               </div>
@@ -65,7 +64,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col md:items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Clock className="h-6 w-6 text-accent" />
               </div>
@@ -77,7 +76,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col md:items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Award className="h-6 w-6 text-accent" />
               </div>
@@ -89,7 +88,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col md:items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <span className="text-2xl font-bold text-accent">★</span>
               </div>

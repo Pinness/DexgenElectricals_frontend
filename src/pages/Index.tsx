@@ -14,7 +14,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-1">
+      <div className="flex-1 overflow-x-hidden">
         <Hero />
         <Services />
 
@@ -91,7 +91,7 @@ const Index = () => {
             </Button>
           </div>
         </section>
-      </main>
+      </div>
 
       <Footer />
     </div>
