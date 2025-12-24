@@ -1,8 +1,21 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import CtaSection from "@/components/CtaSection";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Home, Building2, AlertCircle, Lightbulb, Wrench, Shield } from "lucide-react";
+import {
+  Home,
+  Building2,
+  AlertCircle,
+  Lightbulb,
+  Wrench,
+  Shield,
+} from "lucide-react";
 import residentialImage from "@/assets/residential-service.jpg";
 import commercialImage from "@/assets/commercial-service.jpg";
 import emergencyImage from "@/assets/emergency-service.jpg";
@@ -62,7 +75,7 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-gradient-primary text-primary-foreground py-20">
@@ -71,7 +84,8 @@ const Services = () => {
               Professional Electrical Services
             </h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/90">
-              Comprehensive electrical solutions for homes and businesses. Licensed, insured, and committed to excellence.
+              Comprehensive electrical solutions for homes and businesses.
+              Licensed, insured, and committed to excellence.
             </p>
           </div>
         </section>
@@ -83,7 +97,7 @@ const Services = () => {
               {serviceCategories.map((category, index) => {
                 const Icon = category.icon;
                 const isEven = index % 2 === 0;
-                
+
                 return (
                   <div
                     key={index}
@@ -96,27 +110,31 @@ const Services = () => {
                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
                           <Icon className="h-6 w-6 text-primary-foreground" />
                         </div>
-                        <h2 className="text-3xl font-bold text-foreground">{category.title}</h2>
+                        <h2 className="text-3xl font-bold text-foreground">
+                          {category.title}
+                        </h2>
                       </div>
-                      
+
                       <p className="text-lg text-muted-foreground mb-6">
                         {category.description}
                       </p>
-                      
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                         {category.services.map((service, idx) => (
                           <div key={idx} className="flex items-start gap-2">
                             <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                            <span className="text-sm text-foreground">{service}</span>
+                            <span className="text-sm text-foreground">
+                              {service}
+                            </span>
                           </div>
                         ))}
                       </div>
-                      
+
                       <Button className="bg-gradient-accent hover:opacity-90">
                         Request Quote
                       </Button>
                     </div>
-                    
+
                     <div className={isEven ? "lg:order-2" : "lg:order-1"}>
                       <div className="relative rounded-lg overflow-hidden shadow-strong">
                         <img
@@ -141,19 +159,35 @@ const Services = () => {
                 Additional Specialized Services
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We offer a comprehensive range of electrical services to meet all your needs
+                We offer a comprehensive range of electrical services to meet
+                all your needs
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { icon: Lightbulb, title: "Lighting Design", description: "Custom lighting solutions for any space" },
-                { icon: Wrench, title: "Electrical Repairs", description: "Fast and reliable repair services" },
-                { icon: Shield, title: "Safety Inspections", description: "Comprehensive electrical safety audits" },
+                {
+                  icon: Lightbulb,
+                  title: "Lighting Design",
+                  description: "Custom lighting solutions for any space",
+                },
+                {
+                  icon: Wrench,
+                  title: "Electrical Repairs",
+                  description: "Fast and reliable repair services",
+                },
+                {
+                  icon: Shield,
+                  title: "Safety Inspections",
+                  description: "Comprehensive electrical safety audits",
+                },
               ].map((service, index) => {
                 const Icon = service.icon;
                 return (
-                  <Card key={index} className="hover:shadow-medium transition-shadow">
+                  <Card
+                    key={index}
+                    className="hover:shadow-medium transition-shadow"
+                  >
                     <CardHeader>
                       <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary mb-4">
                         <Icon className="h-6 w-6 text-primary-foreground" />
@@ -169,21 +203,9 @@ const Services = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-primary text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-lg mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
-              Contact us today for a free consultation and quote. We're here to help with all your electrical needs.
-            </p>
-            <Button size="lg" className="bg-accent hover:opacity-90 text-accent-foreground font-semibold">
-              Get Free Quote
-            </Button>
-          </div>
-        </section>
+        <CtaSection />
       </main>
-      
+
       <Footer />
     </div>
   );

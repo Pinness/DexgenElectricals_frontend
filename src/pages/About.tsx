@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CtaSection from "@/components/CtaSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Award, Users, CheckCircle2 } from "lucide-react";
 
@@ -144,6 +145,11 @@ const About = () => {
             </div>
           </div>
         </section>
+
+        <CtaSection
+          title="Work With the Best"
+          description="Experience the difference of working with a dedicated, professional electrical team."
+        />
       </main>
 
       <Footer />
