@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Zap } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import QuoteDialog from "@/components/QuoteDialog";
+import Logo from "@/components/Logo";
 import { CONTACT_INFO } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -20,11 +21,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
-            <Zap className="h-6 w-6 text-primary-foreground" />
-          </div>
-          <span className="text-primary">DEXGEN Electrical Solutions</span>
+        <Link to="/" className="hover:opacity-90 transition-opacity">
+          <Logo />
         </Link>
 
         {/* Desktop Navigation */}

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  Zap,
   Phone,
   Mail,
   MapPin,
@@ -9,6 +8,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import Logo from "@/components/Logo";
 import { CONTACT_INFO } from "@/lib/constants";
 
 const Footer = () => {
@@ -18,14 +18,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
-                <Zap className="h-6 w-6 text-accent-foreground" />
-              </div>
-              <span className="font-bold text-xl">
-                Dexgen Electrical Solutions
-              </span>
-            </div>
+            <Link
+              to="/"
+              className="inline-block hover:opacity-90 transition-opacity"
+            >
+              <Logo variant="light" />
+            </Link>
             <p className="text-sm text-primary-foreground/80">
               Professional electrical services for residential and commercial
               properties. Licensed, insured, and available 24/7.
