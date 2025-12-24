@@ -33,28 +33,28 @@ const Footer = () => {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="hover:text-accent transition-colors"
+                className="hover:text-accent transition-colors active:scale-95 transition-transform duration-150 inline-block"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="hover:text-accent transition-colors"
+                className="hover:text-accent transition-colors active:scale-95 transition-transform duration-150 inline-block"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="hover:text-accent transition-colors"
+                className="hover:text-accent transition-colors active:scale-95 transition-transform duration-150 inline-block"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="hover:text-accent transition-colors"
+                className="hover:text-accent transition-colors active:scale-95 transition-transform duration-150 inline-block"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
