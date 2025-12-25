@@ -51,8 +51,8 @@ const Hero = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left md:text-center">
-            <div className="flex flex-col md:items-center gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Shield className="h-6 w-6 text-accent" />
               </div>
@@ -64,7 +64,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:items-center gap-3">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Clock className="h-6 w-6 text-accent" />
               </div>
@@ -76,7 +76,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:items-center gap-3">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <Award className="h-6 w-6 text-accent" />
               </div>
@@ -88,7 +88,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:items-center gap-3">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
                 <span className="text-2xl font-bold text-accent">★</span>
               </div>
