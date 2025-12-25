@@ -12,6 +12,10 @@ import Logo from "@/components/Logo";
 import { CONTACT_INFO } from "@/lib/constants";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -21,6 +25,7 @@ const Footer = () => {
             <Link
               to="/"
               className="inline-block hover:opacity-90 transition-opacity"
+              onClick={scrollToTop}
             >
               <Logo variant="light" />
             </Link>
@@ -68,6 +73,7 @@ const Footer = () => {
                 <Link
                   to="/"
                   className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                  onClick={scrollToTop}
                 >
                   Home
                 </Link>
@@ -76,6 +82,7 @@ const Footer = () => {
                 <Link
                   to="/services"
                   className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                  onClick={scrollToTop}
                 >
                   Services
                 </Link>
@@ -84,6 +91,7 @@ const Footer = () => {
                 <Link
                   to="/projects"
                   className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                  onClick={scrollToTop}
                 >
                   Projects
                 </Link>
@@ -92,6 +100,7 @@ const Footer = () => {
                 <Link
                   to="/about"
                   className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                  onClick={scrollToTop}
                 >
                   About Us
                 </Link>
@@ -100,6 +109,7 @@ const Footer = () => {
                 <Link
                   to="/contact"
                   className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                  onClick={scrollToTop}
                 >
                   Contact
                 </Link>
@@ -169,10 +179,15 @@ const Footer = () => {
               <Link
                 to="/privacy"
                 className="hover:text-accent transition-colors"
+                onClick={scrollToTop}
               >
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="hover:text-accent transition-colors">
+              <Link
+                to="/terms"
+                className="hover:text-accent transition-colors"
+                onClick={scrollToTop}
+              >
                 Terms of Service
               </Link>
             </div>

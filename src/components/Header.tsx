@@ -10,6 +10,10 @@ import { cn } from "@/lib/utils";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/services", label: "Services" },
@@ -21,7 +25,11 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="hover:opacity-90 transition-opacity">
+        <Link
+          to="/"
+          className="hover:opacity-90 transition-opacity"
+          onClick={scrollToTop}
+        >
           <Logo />
         </Link>
 
@@ -31,6 +39,7 @@ const Header = () => {
             <NavLink
               key={link.to}
               to={link.to}
+              onClick={scrollToTop}
               className={({ isActive }) =>
                 cn(
                   "text-sm font-medium transition-colors hover:text-primary active:scale-95 transition-transform duration-150",
@@ -83,7 +92,10 @@ const Header = () => {
                     isActive ? "text-primary font-semibold" : "text-foreground"
                   )
                 }
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  scrollToTop();
+                }}
               >
                 {link.label}
               </NavLink>
