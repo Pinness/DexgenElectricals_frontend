@@ -2,10 +2,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { Card, CardContent } from "@/components/ui/card";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Loader2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
+import { useSiteContentList } from "@/hooks/useSiteContent";
 
 const Contact = () => {
+  const { content: areas, loading: loadingAreas } = useSiteContentList("contact_area");
+  const { content: sections, loading: loadingSections } = useSiteContentList("contact_section");
+
+  const hero = sections.find(s => s.key === "contact_hero");
+  const hours = sections.find(s => s.key === "contact_hours");
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -15,11 +22,10 @@ const Contact = () => {
         <section className="bg-gradient-primary text-primary-foreground py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Get In Touch
+              {hero?.title || "Get In Touch"}
             </h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/90">
-              Ready to start your electrical project? Contact us today for a
-              free consultation and quote.
+              {hero?.description || "Ready to start your electrical project? Contact us today for a free consultation and quote."}
             </p>
           </div>
         </section>
@@ -104,12 +110,16 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg mb-2 text-foreground">
-                          Hours
+                          {hours?.title || "Hours"}
                         </h3>
-                        <div className="space-y-1 text-sm text-muted-foreground">
-                          <p>Monday - Friday: 8am - 6pm</p>
-                          <p>Saturday: 9am - 4pm</p>
-                          <p>Sunday: Emergency only</p>
+                        <div className="space-y-1 text-sm text-muted-foreground whitespace-pre-wrap">
+                          {hours?.description || (
+                            <>
+                              <p>Monday - Friday: 8am - 6pm</p>
+                              <p>Saturday: 9am - 4pm</p>
+                              <p>Sunday: Emergency only</p>
+                            </>
+                          )}
                           <p className="text-accent font-medium mt-2">
                             24/7 Emergency Service
                           </p>
@@ -148,23 +158,32 @@ const Contact = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              {[
-                "Lagos Mainland",
-                "Ikeja",
-                "Ikorodu",
-                "Badagry",
-                "Lagos Island",
-                "Epe",
-                "Apapa",
-                "Ajekunle",
-              ].map((area, index) => (
-                <div
-                  key={index}
-                  className="bg-background p-4 rounded-lg text-center text-foreground font-medium hover:shadow-soft transition-shadow"
-                >
-                  {area}
-                </div>
-              ))}
+              {loadingAreas ? (
+                <div className="col-span-full flex justify-center p-8"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>
+              ) : areas.length > 0 ? (
+                areas.map((area) => (
+                  <div
+                    key={area.id}
+                    className="bg-background p-4 rounded-lg text-center text-foreground font-medium hover:shadow-soft transition-shadow"
+                  >
+                    {area.title}
+                  </div>
+                ))
+              ) : (
+                [
+                  "Lagos Mainland",
+                  "Ikeja",
+                  "Ikorodu",
+                  "Badagry",
+                ].map((area, index) => (
+                  <div
+                    key={index}
+                    className="bg-background p-4 rounded-lg text-center text-foreground font-medium hover:shadow-soft transition-shadow"
+                  >
+                    {area}
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </section>

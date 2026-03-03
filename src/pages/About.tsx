@@ -2,9 +2,23 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Award, Users, CheckCircle2 } from "lucide-react";
+import { Shield, Award, Users, CheckCircle2, Loader2 } from "lucide-react";
+import { useSiteContentList } from "@/hooks/useSiteContent";
+
+const iconMap: Record<string, any> = {
+  Shield: Shield,
+  Award: Award,
+  Users: Users,
+  CheckCircle2: CheckCircle2,
+};
 
 const About = () => {
+  const { content: values, loading: loadingValues } = useSiteContentList("about_value");
+  const { content: storyContent, loading: loadingStory } = useSiteContentList("about_story");
+  const { content: certs, loading: loadingCerts } = useSiteContentList("about_cert");
+
+  const story = storyContent[0];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -28,29 +42,28 @@ const About = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                Our Story
+                {story?.title || "Our Story"}
               </h2>
-              <div className="space-y-4 text-lg text-muted-foreground">
-                <p>
-                  Founded in 2008, Dexgen Engineering has been serving the Lagos
-                  metropolitan area with dedication and excellence. What started
-                  as a small team of licensed electricians has grown into one of
-                  the most trusted electrical service providers in the region.
-                </p>
-                <p>
-                  Our commitment to quality workmanship, transparent pricing,
-                  and exceptional customer service has earned us the trust of
-                  hundreds of satisfied residential and commercial clients. We
-                  take pride in every project, whether it's a simple outlet
-                  installation or a complete commercial electrical system
-                  upgrade.
-                </p>
-                <p>
-                  With over 15 years of experience, our team stays current with
-                  the latest electrical codes, technologies, and best practices.
-                  We're not just electricians – we're your partners in creating
-                  safe, efficient, and reliable electrical systems.
-                </p>
+              <div className="space-y-4 text-lg text-muted-foreground whitespace-pre-wrap">
+                {loadingStory ? (
+                  <div className="flex justify-center p-8"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div>
+                ) : (
+                  story?.description || (
+                    <>
+                      <p>
+                        Founded in 2008, Dexgen Engineering has been serving the Lagos
+                        metropolitan area with dedication and excellence. What started
+                        as a small team of licensed electricians has grown into one of
+                        the most trusted electrical service providers in the region.
+                      </p>
+                      <p>
+                        Our commitment to quality workmanship, transparent pricing,
+                        and exceptional customer service has earned us the trust of
+                        hundreds of satisfied residential and commercial clients.
+                      </p>
+                    </>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -69,52 +82,33 @@ const About = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: Shield,
-                  title: "Safety First",
-                  description:
-                    "We prioritize safety in every project, following all codes and regulations to protect you and your property.",
-                },
-                {
-                  icon: Award,
-                  title: "Quality Work",
-                  description:
-                    "Our workmanship is backed by years of experience and a commitment to excellence in every detail.",
-                },
-                {
-                  icon: Users,
-                  title: "Customer Focus",
-                  description:
-                    "Your satisfaction is our priority. We listen, communicate, and deliver solutions that exceed expectations.",
-                },
-                {
-                  icon: CheckCircle2,
-                  title: "Reliability",
-                  description:
-                    "We show up on time, complete work as promised, and stand behind our services with comprehensive warranties.",
-                },
-              ].map((value, index) => {
-                const Icon = value.icon;
-                return (
-                  <Card
-                    key={index}
-                    className="text-center hover:shadow-medium transition-shadow"
-                  >
-                    <CardContent className="pt-6">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary mx-auto mb-4">
-                        <Icon className="h-8 w-8 text-primary-foreground" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-3 text-foreground">
-                        {value.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {value.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              {loadingValues ? (
+                <div className="col-span-full flex justify-center p-12"><Loader2 className="animate-spin h-10 w-10 text-primary" /></div>
+              ) : values.length > 0 ? (
+                values.map((value) => {
+                  const Icon = iconMap[value.metadata?.icon] || Shield;
+                  return (
+                    <Card
+                      key={value.id}
+                      className="text-center hover:shadow-medium transition-shadow"
+                    >
+                      <CardContent className="pt-6">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary mx-auto mb-4">
+                          <Icon className="h-8 w-8 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-3 text-foreground">
+                          {value.title}
+                        </h3>
+                        <p className="text-muted-foreground">
+                          {value.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  );
+                })
+              ) : (
+                <p className="col-span-full text-center text-muted-foreground italic">No values found in CMS.</p>
+              )}
             </div>
           </div>
         </section>
@@ -128,19 +122,18 @@ const About = () => {
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  "Licensed Master Electrician",
-                  "Fully Insured & Bonded",
-                  "OSHA Safety Certified",
-                  "BBB A+ Rating",
-                  "National Electrical Code Certified",
-                  "Commercial & Residential Licensed",
-                ].map((cert, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0" />
-                    <span className="text-foreground font-medium">{cert}</span>
-                  </div>
-                ))}
+                {loadingCerts ? (
+                  <div className="col-span-full flex justify-center"><Loader2 className="animate-spin h-6 w-6 text-primary" /></div>
+                ) : certs.length > 0 ? (
+                  certs.map((cert) => (
+                    <div key={cert.id} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0" />
+                      <span className="text-foreground font-medium">{cert.title}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="col-span-full text-center text-muted-foreground italic">No certifications found in CMS.</p>
+                )}
               </div>
             </div>
           </div>

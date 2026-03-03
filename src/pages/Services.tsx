@@ -15,63 +15,23 @@ import {
   Lightbulb,
   Wrench,
   Shield,
+  Loader2,
 } from "lucide-react";
-import residentialImage from "@/assets/residential-service.jpg";
-import commercialImage from "@/assets/commercial-service.jpg";
-import emergencyImage from "@/assets/emergency-service.jpg";
+import { useSiteContentList } from "@/hooks/useSiteContent";
+import residentialImageDefault from "@/assets/residential-service.jpg";
 
-const serviceCategories = [
-  {
-    title: "Residential Services",
-    description: "Expert electrical solutions for your home",
-    icon: Home,
-    image: residentialImage,
-    services: [
-      "Lighting installation and upgrades",
-      "Electrical panel upgrades and replacement",
-      "Home rewiring and circuit installation",
-      "GFCI and AFCI outlet installation",
-      "Ceiling fan installation",
-      "Smart home wiring and automation",
-      "Home electrical safety inspections",
-      "Generator installation and maintenance",
-    ],
-  },
-  {
-    title: "Commercial Services",
-    description: "Reliable electrical services for businesses",
-    icon: Building2,
-    image: commercialImage,
-    services: [
-      "Commercial electrical installation",
-      "Office building electrical systems",
-      "Retail store electrical services",
-      "Restaurant electrical work",
-      "Security and surveillance systems",
-      "Energy-efficient lighting solutions",
-      "Electrical maintenance contracts",
-      "Code compliance and upgrades",
-    ],
-  },
-  {
-    title: "Emergency Services",
-    description: "24/7 rapid response for urgent electrical issues",
-    icon: AlertCircle,
-    image: emergencyImage,
-    services: [
-      "Power outage troubleshooting",
-      "Emergency electrical repairs",
-      "Circuit breaker issues",
-      "Electrical fire prevention",
-      "Damaged wiring repair",
-      "Emergency lighting installation",
-      "Storm damage electrical repair",
-      "Same-day service available",
-    ],
-  },
-];
+const iconMap: Record<string, any> = {
+  Home: Home,
+  Building2: Building2,
+  AlertCircle: AlertCircle,
+  Lightbulb: Lightbulb,
+  Wrench: Wrench,
+  Shield: Shield,
+};
 
 const Services = () => {
+  const { content: categories, loading: loadingCategories } = useSiteContentList("service_category");
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -94,113 +54,70 @@ const Services = () => {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="space-y-20">
-              {serviceCategories.map((category, index) => {
-                const Icon = category.icon;
-                const isEven = index % 2 === 0;
+              {loadingCategories ? (
+                <div className="flex justify-center p-20"><Loader2 className="animate-spin h-12 w-12 text-primary" /></div>
+              ) : categories.length > 0 ? (
+                categories.map((category, index) => {
+                  const Icon = iconMap[category.metadata?.icon] || Home;
+                  const isEven = index % 2 === 0;
+                  const features = Array.isArray(category.metadata?.features) ? category.metadata.features : [];
 
-                return (
-                  <div
-                    key={index}
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                      isEven ? "" : "lg:flex-row-reverse"
-                    }`}
-                  >
-                    <div className={isEven ? "lg:order-1" : "lg:order-2"}>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-                          <Icon className="h-6 w-6 text-primary-foreground" />
-                        </div>
-                        <h2 className="text-3xl font-bold text-foreground">
-                          {category.title}
-                        </h2>
-                      </div>
-
-                      <p className="text-lg text-muted-foreground mb-6">
-                        {category.description}
-                      </p>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                        {category.services.map((service, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                            <span className="text-sm text-foreground">
-                              {service}
-                            </span>
+                  return (
+                    <div
+                      key={category.id}
+                      className={`flex flex-col lg:flex-row gap-12 items-center ${isEven ? "" : "lg:flex-row-reverse"
+                        }`}
+                    >
+                      <div className="flex-1 w-full">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary shadow-soft">
+                            <Icon className="h-6 w-6 text-primary-foreground" />
                           </div>
-                        ))}
+                          <h2 className="text-3xl font-bold text-foreground">
+                            {category.title}
+                          </h2>
+                        </div>
+
+                        <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                          {category.description}
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                          {features.map((service: string, idx: number) => (
+                            <div key={idx} className="flex items-start gap-2 group/item">
+                              <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2 flex-shrink-0 transition-transform group-hover/item:scale-150" />
+                              <span className="text-sm text-foreground group-hover/item:text-primary transition-colors">
+                                {service}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <Button className="bg-gradient-accent hover:opacity-90 shadow-soft">
+                          Request Quote
+                        </Button>
                       </div>
 
-                      <Button className="bg-gradient-accent hover:opacity-90">
-                        Request Quote
-                      </Button>
-                    </div>
-
-                    <div className={isEven ? "lg:order-2" : "lg:order-1"}>
-                      <div className="relative rounded-lg overflow-hidden shadow-strong">
-                        <img
-                          src={category.image}
-                          alt={category.title}
-                          className="w-full h-[400px] object-cover"
-                        />
+                      <div className="flex-1 w-full">
+                        <div className="relative rounded-xl overflow-hidden shadow-strong group/img">
+                          <img
+                            src={category.image_url || residentialImageDefault}
+                            alt={category.title || "Service"}
+                            className="w-full h-[400px] object-cover transition-transform duration-700 group-hover/img:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-primary/10 group-hover/img:bg-transparent transition-colors duration-500" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <p className="text-center text-muted-foreground italic">No service categories found in CMS.</p>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Additional Services */}
-        <section className="py-20 bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                Additional Specialized Services
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We offer a comprehensive range of electrical services to meet
-                all your needs
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Lightbulb,
-                  title: "Lighting Design",
-                  description: "Custom lighting solutions for any space",
-                },
-                {
-                  icon: Wrench,
-                  title: "Electrical Repairs",
-                  description: "Fast and reliable repair services",
-                },
-                {
-                  icon: Shield,
-                  title: "Safety Inspections",
-                  description: "Comprehensive electrical safety audits",
-                },
-              ].map((service, index) => {
-                const Icon = service.icon;
-                return (
-                  <Card
-                    key={index}
-                    className="hover:shadow-medium transition-shadow"
-                  >
-                    <CardHeader>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary mb-4">
-                        <Icon className="h-6 w-6 text-primary-foreground" />
-                      </div>
-                      <CardTitle>{service.title}</CardTitle>
-                      <CardDescription>{service.description}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
 
         {/* CTA Section */}
         <CtaSection />
