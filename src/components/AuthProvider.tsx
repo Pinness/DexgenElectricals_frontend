@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode, useRef } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabaseClient";
 
@@ -24,56 +24,49 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // Ref to track the current ID of the checkAdminStatus call to prevent race conditions
-    const checkIdRef = import.meta.env.DEV ? { current: 0 } : { current: 0 };
-    // Actually just use a normal ref
-    const lastCheckId = useState(() => ({ count: 0 }))[0];
+    // Use Ref to avoid obsolete state in async closures
+    const checkCountRef = useRef(0);
 
-    // Function to check if the current user exists in the admin_profiles table
     const checkAdminStatus = async (userId: string) => {
-        const thisCheckId = ++lastCheckId.count;
+        const currentCheckId = ++checkCountRef.current;
+        console.log(`[Auth] Checking admin status for ${userId} (Check ID: ${currentCheckId})`);
 
         try {
-            const { data, error } = await supabase
+            // Add a race-condition-safe check for admin status
+            // Use a promise with a timeout to prevent infinite hangs
+            const timeoutPromise = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Admin check timed out")), 5000)
+            );
+
+            const fetchPromise = supabase
                 .from("admin_profiles")
-                .select("*")
+                .select("id")
                 .eq("id", userId)
                 .single();
 
-            // If a newer check has started, ignore this one
-            if (thisCheckId !== lastCheckId.count) return;
+            const result: any = await Promise.race([fetchPromise, timeoutPromise]);
+            const { data, error } = result;
+
+            // Silently discard if a newer check has started
+            if (currentCheckId !== checkCountRef.current) return;
 
             if (error) {
-                // Handle specific error cases
                 if (error.code === 'PGRST116') { // Not found
-                    console.log("User not found in admin_profiles.");
-                    setIsAdmin(false);
-                } else if (error.message?.includes('AbortError') || error.message?.includes('Lock broken')) {
-                    console.warn("Check aborted, waiting for next one...");
-                    return;
-                } else if (error.message?.includes('TypeError: Failed to fetch') || error.message?.includes('net::ERR_INTERNET_DISCONNECTED')) {
-                    console.warn("Connection lost. Retrying when online...");
+                    console.log("[Auth] User is not an admin.");
                     setIsAdmin(false);
                 } else {
-                    console.error("Auth status error:", error.message);
+                    console.error("[Auth] Admin check error:", error.message);
                     setIsAdmin(false);
                 }
             } else if (data) {
-                console.log("User IS an admin!");
+                console.log("[Auth] User verified as Admin.");
                 setIsAdmin(true);
             }
         } catch (e: any) {
-            if (e.name === 'AbortError' || e.message?.includes('AbortError')) {
-                return;
-            }
-            if (e.message?.includes('Failed to fetch') || e.message?.includes('network')) {
-                console.warn("Network error during admin check. Check connection.");
-            } else {
-                console.error("Exception checking admin status:", e);
-            }
+            console.error("[Auth] Exception in admin check:", e.message);
             setIsAdmin(false);
         } finally {
-            if (thisCheckId === lastCheckId.count) {
+            if (currentCheckId === checkCountRef.current) {
                 setLoading(false);
             }
         }
@@ -83,27 +76,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         let mounted = true;
 
         async function initializeAuth() {
+            console.log("[Auth] Initializing authentication...");
             try {
                 // 1. Get initial session
-                const { data: { session: initialSession }, error: sessionError } = await supabase.auth.getSession();
+                const { data: { session: initialSession } } = await supabase.auth.getSession();
 
                 if (!mounted) return;
-
-                if (sessionError) {
-                    console.error("Session fetch error:", sessionError);
-                }
 
                 if (initialSession) {
                     setSession(initialSession);
                     setUser(initialSession.user);
                     await checkAdminStatus(initialSession.user.id);
                 } else {
+                    console.log("[Auth] No initial session found.");
                     setLoading(false);
                 }
 
                 // 2. Setup listener for future changes
                 const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
-                    console.log("Auth event fired:", event, "User:", currentSession?.user?.id);
+                    console.log(`[Auth] Auth event: ${event}`);
 
                     if (!mounted) return;
 
@@ -115,17 +106,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                         return;
                     }
 
-                    if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-                        setSession(currentSession);
-                        setUser(currentSession?.user ?? null);
+                    if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'TOKEN_REFRESHED') {
+                        const newUser = currentSession?.user ?? null;
 
-                        if (currentSession?.user) {
-                            setLoading(true);
-                            await checkAdminStatus(currentSession.user.id);
+                        // Only trigger loading/check if the user actually changed or we aren't verified yet
+                        if (newUser?.id !== user?.id || !isAdmin) {
+                            setSession(currentSession);
+                            setUser(newUser);
+                            if (newUser) {
+                                setLoading(true);
+                                await checkAdminStatus(newUser.id);
+                            } else {
+                                setLoading(false);
+                            }
                         }
-                    } else if (!currentSession) {
-                        setIsAdmin(false);
-                        setLoading(false);
                     }
                 });
 
@@ -133,7 +127,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     subscription.unsubscribe();
                 };
             } catch (error) {
-                console.error("Auth initialization error:", error);
+                console.error("[Auth] Initialization failed:", error);
                 if (mounted) setLoading(false);
             }
         }
@@ -143,9 +137,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return () => {
             mounted = false;
         };
-    }, []);
+    }, [user?.id, isAdmin]); // Re-bind listener slightly more carefully if needed
 
     const signOut = async () => {
+        setLoading(true);
         await supabase.auth.signOut();
     };
 
